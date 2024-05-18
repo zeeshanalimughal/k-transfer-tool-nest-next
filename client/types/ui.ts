@@ -3,6 +3,7 @@ export interface IToolType {
   description: string;
   color: string;
   icon: JSX.Element;
+  href: string;
 }
 
 

@@ -1,10 +1,10 @@
 import React from 'react'
-import { services } from '@/constants/data'
 import ServiceCard from './service-card'
+import { services } from '@/constants/data'
 
 function OurService() {
     return (
-        <div className='w-full bg-white px-10 md:px-20 lg:px-30 xl:px-72 py-20'>
+        <div className='w-full bg-white px-10 md:px-20 lg:px-30 xl:px-72 py-10'>
             <div className="flex flex-col gap-2 justify-center items-center text-center">
                 <h2 className="uppercase text-2xl font-extrabold text-gray-900">
                     Optimize Your Fleet Management Now
