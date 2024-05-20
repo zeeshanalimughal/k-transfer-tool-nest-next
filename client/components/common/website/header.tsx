@@ -3,6 +3,8 @@ import { Rubik } from "next/font/google";
 import { ChevronDown, Globe, Grid2x2, HelpCircle, LogIn, Tag } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import Logo from './logo';
+import { SignUpForm } from '@/components/web/auth/signup-form';
+import { LoginForm } from '@/components/web/auth/login-form';
 
 function Header() {
   return (
@@ -31,11 +33,8 @@ function Header() {
           </div>
         </div>
         <div className="flex items-center gap-4 px-3 lg:px-10">
-          <div className="flex items-center gap-2 cursor-pointer">
-            <LogIn size={18} strokeWidth={2.6} />
-            <span className='font-extrabold text-gray-700'>Login</span>
-          </div>
-          <Button className='bg-green-700 hover:bg-green-800'>Sign Up</Button>
+          <LoginForm />
+          <SignUpForm />
         </div>
       </div>
     </div>
