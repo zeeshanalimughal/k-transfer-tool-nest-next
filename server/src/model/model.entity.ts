@@ -1,6 +1,6 @@
-import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
-import mongoose, { HydratedDocument, ObjectId, Types } from "mongoose";
-import { Transform } from "class-transformer";
+import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
+import mongoose, { HydratedDocument, ObjectId, Types } from 'mongoose';
+import { Transform } from 'class-transformer';
 
 export type ModelEntityDocument = HydratedDocument<ModelEntity>;
 
@@ -15,7 +15,7 @@ export class ModelEntity {
   @Prop({ type: Types.ObjectId, default: Types.ObjectId, auto: true })
   _id: ObjectId;
 
-  @Prop({ type: String, default: "Anonymous" })
+  @Prop({ type: String, default: 'Anonymous' })
   createdBy: string;
 
   @Prop({ type: mongoose.Schema.Types.Date, default: () => new Date() })
