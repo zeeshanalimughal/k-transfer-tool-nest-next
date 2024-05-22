@@ -53,7 +53,7 @@ export class JwtStrategy {
     const payload = { email, sub: id };
 
     return this.jwtService.sign(payload, {
-      expiresIn: this.jwtConfig.refreshExpires,
+      expiresIn: this.jwtConfig.expiresIn,
     });
   }
 }

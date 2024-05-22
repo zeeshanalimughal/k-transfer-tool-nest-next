@@ -1,6 +1,7 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import mongoose, { HydratedDocument } from 'mongoose';
 import { ModelEntity, ModelEntitySchema } from 'src/model/model.entity';
+import { AuthProvidersEnum } from 'src/modules/authentication/interfaces/auth.enum';
 import validator from 'validator';
 
 export type UserDocument = HydratedDocument<User>;
@@ -33,6 +34,17 @@ export class User extends ModelEntity {
     minlength: 8,
   })
   password: string;
+
+  @Prop({
+    default: AuthProvidersEnum.email,
+  })
+  provider: string;
+
+  @Prop({
+    type: String,
+    default: null,
+  })
+  socialId?: string | null;
 
   @Prop({ type: mongoose.Schema.Types.Date })
   passwordChangedAt: Date;
