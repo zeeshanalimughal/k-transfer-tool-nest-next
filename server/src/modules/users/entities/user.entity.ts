@@ -16,7 +16,6 @@ export class User extends ModelEntity {
   @Prop({
     type: String,
     required: [true, 'A user must have a name'],
-    maxlength: [10, 'Username must be less than or equal to 10 characters.'],
   })
   name: string;
 

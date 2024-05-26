@@ -35,16 +35,6 @@ export class AuthenticationService {
   }
 
   async signUp(signupDto: SignUpDTO): Promise<ResponseOut<null>> {
-    const recaptchaResponse = signupDto['g-recaptcha-response'];
-
-    if (!recaptchaResponse) {
-      return {
-        statusCode: 400,
-        status: 'fail',
-        message: 'Please select captcha',
-      };
-    }
-
     try {
       await this.usersRepository.create(signupDto);
       return {
@@ -57,44 +47,17 @@ export class AuthenticationService {
       return {
         statusCode: 500,
         status: 'error',
-        message: 'An error occurred',
+        message: error.message,
       };
     }
   }
 
-  async signIn(
-    signInDto: SignInDTO,
-    res: Response,
-  ): Promise<ResponseOut<SignInResponse>> {
-    const { email, password } = signInDto;
-    if (!email || !password) {
-      return {
-        statusCode: 400,
-        status: 'fail',
-        message: 'Please enter email and password',
-      };
-    }
-
+  async signIn(signInDto: SignInDTO): Promise<ResponseOut<SignInResponse>> {
+    const { email } = signInDto;
     const user: any =
       await this.usersRepository.findByEmailAndGetPassword(email);
-
-    const recaptchaResponse = signInDto['g-recaptcha-response'];
-
-    if (!recaptchaResponse) {
-      return {
-        statusCode: 400,
-        status: 'fail',
-        message: 'Please select captcha',
-      };
-    }
-
     try {
-      return this.jwtStrategy.createSendToken(
-        user,
-        200,
-        res,
-        'Login Successfully',
-      );
+      return this.jwtStrategy.createSendToken(user, 200, 'Login Successfully');
     } catch (error) {
       return {
         statusCode: 500,

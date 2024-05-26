@@ -8,7 +8,7 @@ import { AppConfigModule } from 'src/config/app/config.module';
 import { UsersModule } from '../users/users.module';
 import { AuthenticationController } from './auth.controller';
 import { AuthenticationService } from './auth.service';
-import { LocalStrategy } from 'src/common/guards/local.guard';
+import { LocalStrategy } from './strategies/local.strategy';
 
 @Module({
   imports: [

@@ -3,7 +3,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { User, UserSchema } from './entities/user.entity';
 import { UsersService } from './users.service';
 import { UsersController } from './users.controller';
-import bcrypt from 'bcryptjs';
+import * as bcrypt from 'bcryptjs';
 import * as crypto from 'crypto';
 import { UsersRepository } from './users.repository';
 

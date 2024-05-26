@@ -12,7 +12,7 @@ export type ModelEntityDocument = HydratedDocument<ModelEntity>;
 })
 export class ModelEntity {
   @Transform(({ value }) => value.toString())
-  @Prop({ type: Types.ObjectId, default: Types.ObjectId, auto: true })
+  @Prop({ type: Types.ObjectId, default: new Types.ObjectId(), auto: true })
   _id: ObjectId;
 
   @Prop({ type: String, default: 'Anonymous' })
