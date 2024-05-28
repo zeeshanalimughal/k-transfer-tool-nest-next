@@ -1,3 +1,4 @@
+"use client"
 import React from 'react'
 import { Rubik } from "next/font/google";
 import { ChevronDown, Globe, Grid2x2, HelpCircle, LogIn, Tag } from 'lucide-react';
@@ -5,8 +6,10 @@ import { Button } from '@/components/ui/button';
 import Logo from './logo';
 import { SignUpForm } from '@/components/web/auth/signup-form';
 import { LoginForm } from '@/components/web/auth/login-form';
+import { signOut, useSession } from 'next-auth/react';
 
 function Header() {
+  const session = useSession()
   return (
     <div className='w-full flex justify-between px-8 border-b-[5px] border-b-cyan-600 h-16'>
       <div className="flex items-center gap-10">
@@ -32,10 +35,18 @@ function Header() {
             <span className='font-extrabold text-gray-700'>EN</span>
           </div>
         </div>
-        <div className="flex items-center gap-4 px-3 lg:px-10">
-          <LoginForm />
-          <SignUpForm />
-        </div>
+        {session.status !== "loading" && <div className="flex items-center gap-4 px-3 lg:px-10">
+          {session.status === "authenticated" ? (
+            <Button className='bg-blue-600 hover:bg-blue-700 text-white rounded-md w-full py-4 text-lg' onClick={ () =>  signOut({
+              redirect: true,
+            })}>SignOut</Button>
+          ) : (
+            <>
+              <LoginForm />
+              <SignUpForm />
+            </>
+          )}
+        </div>}
       </div>
     </div>
   )

@@ -1,5 +1,5 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import mongoose, { HydratedDocument, ObjectId, Types } from 'mongoose';
+import mongoose, { HydratedDocument, ObjectId } from 'mongoose';
 import { Transform } from 'class-transformer';
 
 export type ModelEntityDocument = HydratedDocument<ModelEntity>;
@@ -12,7 +12,11 @@ export type ModelEntityDocument = HydratedDocument<ModelEntity>;
 })
 export class ModelEntity {
   @Transform(({ value }) => value.toString())
-  @Prop({ type: Types.ObjectId, default: new Types.ObjectId(), auto: true })
+  @Prop({
+    type: mongoose.Schema.Types.ObjectId,
+    default: new mongoose.Types.ObjectId(),
+    auto: true,
+  })
   _id: ObjectId;
 
   @Prop({ type: String, default: 'Anonymous' })

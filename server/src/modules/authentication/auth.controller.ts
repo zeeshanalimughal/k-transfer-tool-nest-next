@@ -33,7 +33,7 @@ export class AuthenticationController {
   async test(): Promise<string> {
     return 'test';
   }
-  @Post('signup')
+  @Post('sign-up')
   async signup(
     @Body() signupDto: SignUpDTO,
     @Res() res: Response,
@@ -43,7 +43,7 @@ export class AuthenticationController {
   }
 
   @UseGuards(AuthGuard('local'))
-  @Post('signIn')
+  @Post('sign-in')
   async signIn(
     @Body() signInDto: SignInDTO,
     @Res() res: Response,

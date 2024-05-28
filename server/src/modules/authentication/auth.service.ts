@@ -12,6 +12,7 @@ import { LogClass } from 'src/common/decorators/log-class.decorator';
 import { UsersRepository } from '../users/users.repository';
 import { UserDocument } from '../users/entities/user.entity';
 import { SignUpDTO } from './dto/sign-up.dto';
+import { UserAlreadyExistsException } from './exceptions/UserAlreadyExistsException';
 
 @Injectable()
 @LogClass()
@@ -35,21 +36,14 @@ export class AuthenticationService {
   }
 
   async signUp(signupDto: SignUpDTO): Promise<ResponseOut<null>> {
-    try {
-      await this.usersRepository.create(signupDto);
-      return {
-        statusCode: 200,
-        status: 'success',
-        message: 'Register Successfully',
-      };
-    } catch (error) {
-      /* Handle error */
-      return {
-        statusCode: 500,
-        status: 'error',
-        message: error.message,
-      };
-    }
+    const user = await this.usersRepository.findByEmail(signupDto.email);
+    if (user) throw new UserAlreadyExistsException(signupDto.email);
+    await this.usersRepository.create(signupDto);
+    return {
+      statusCode: 200,
+      status: 'success',
+      message: 'Register Successfully',
+    };
   }
 
   async signIn(signInDto: SignInDTO): Promise<ResponseOut<SignInResponse>> {

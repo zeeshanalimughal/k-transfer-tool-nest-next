@@ -30,7 +30,7 @@ export class User extends ModelEntity {
   @Prop({
     type: String,
     required: [true, 'Please provide a password'],
-    minlength: 8,
+    minlength: 6,
   })
   password: string;
 
@@ -56,7 +56,7 @@ export class User extends ModelEntity {
 
   @Prop({
     type: Boolean,
-    default: false,
+    default: true,
   })
   active: boolean;
 }
