@@ -19,34 +19,6 @@ export class UsersService {
     return userInfo;
   }
 
-  /* Current user name edit */
-  async userNameUpdate(id: string, name: string) {
-    const messageUpdate = await this.usersRepository.updateOne(
-      { id },
-      { name },
-    );
-
-    return messageUpdate;
-  }
-
-  /* Notification security */
-  async notificationUpdate(id: string, notification: string) {
-    const messageUpdate = await this.usersRepository.updateOne(
-      { id },
-      { notification },
-    );
-    return messageUpdate;
-  }
-
-  /* Notification muted security */
-  async notificationMutedUpdate(id: string, isMuted: boolean) {
-    const messageUpdate = await this.usersRepository.updateOne(
-      { id },
-      { is_muted: isMuted },
-    );
-    return messageUpdate;
-  }
-
   /* Profile Upload */
   async profileUpdate(id: string, image: string) {
     const messageUpdate = await this.usersRepository.updateOne(
@@ -54,13 +26,5 @@ export class UsersService {
       { image },
     );
     return messageUpdate;
-  }
-  /* User leaves chat */
-  async userLeave(id: string) {
-    const user = await this.usersRepository.updateOne(
-      { id },
-      { $set: { active: 'false' } },
-    );
-    return user;
   }
 }

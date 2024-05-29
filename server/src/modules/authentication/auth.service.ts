@@ -13,6 +13,7 @@ import { UsersRepository } from '../users/users.repository';
 import { UserDocument } from '../users/entities/user.entity';
 import { SignUpDTO } from './dto/sign-up.dto';
 import { UserAlreadyExistsException } from './exceptions/UserAlreadyExistsException';
+import { SocialInterface } from '../auth-google/interface/social.interface';
 
 @Injectable()
 @LogClass()
@@ -59,6 +60,16 @@ export class AuthenticationService {
         message: 'An error occurred',
       };
     }
+  }
+
+  async validateSocialLogin(
+    authProvider: string,
+    socialData: SocialInterface,
+  ): Promise<any> {
+    return {
+      authProvider,
+      socialData,
+    };
   }
 
   async forgotPassword(

@@ -67,19 +67,19 @@ export function LoginForm() {
                     <span className='font-extrabold text-gray-700'>Login</span>
                 </div>
             </SheetTrigger>
-            <SheetContent className="flex w-full flex-col pr-0 sm:max-w-screen-xl rounded-s-3xl bg-gray-100" closRight={true}>
+            <SheetContent className="flex w-full flex-col pr-0 sm:max-w-screen-lg rounded-s-0  sm:rounded-s-3xl bg-gray-100 p-0" closRight={true}>
                 <div className="flex justify-center items-center h-full w-full">
                     <Form {...form}>
-                        <form className="w-full md:w-2/4 lg:w-1/2 xl:w-2/4 px-10" onSubmit={form.handleSubmit(onSubmit)}>
-                            <SheetTitle className="text-3xl text-gray-900 text-center mb-6">Log In</SheetTitle>
-                            <Button className='w-full py-6 bg-white text-lg flex items-center gap-2 rounded-md border-[1px]' variant={"secondary"} onClick={(e) => {
+                        <form className="w-full md:w-2/4 lg:w-1/2 xl:w-2/4 px-2 md:px-10" onSubmit={form.handleSubmit(onSubmit)}>
+                            <SheetTitle className="text-2xl md:text-3xl text-gray-900 text-center mb-6">Log In</SheetTitle>
+                            <Button className='w-full py-5 bg-white text-md md:text-lg flex items-center gap-2 rounded-md border-[1px]' variant={"secondary"} onClick={(e) => {
                                 e.preventDefault()
-                                signIn("google", { redirect: true, callbackUrl: "/" })
+                                signIn("google", { signIn: true, redirect: true, callbackUrl: "/" })
                             }} >
                                 <Image src="/icons/google-icon.svg" width={20} height={20} alt="google" />
                                 Continue with Google
                             </Button>
-                            <Label className='text-gray-900 my-8 text-center text-lg block font-bold'>or</Label>
+                            <Label className='text-gray-900 my-4 text-center text-lg block font-bold'>or</Label>
                             <div className="grid grid-cols-1 gap-3">
                                 <FormField
                                     control={form.control}
@@ -92,7 +92,7 @@ export function LoginForm() {
                                                     disabled={loading}
                                                     placeholder="Enter email"
                                                     {...field}
-                                                    className='w-full py-6 focus-visible:ring-0 border-[1px] my-4'
+                                                    className='w-full py-5 focus-visible:ring-0 border-[1px] my-4'
                                                 />
                                             </FormControl>
                                             <FormMessage />
@@ -111,7 +111,7 @@ export function LoginForm() {
                                                     type="password"
                                                     placeholder="Enter password"
                                                     {...field}
-                                                    className='w-full py-6 focus-visible:ring-0 focus:outline-none border-[1px] my-4'
+                                                    className='w-full py-5 focus-visible:ring-0 focus:outline-none border-[1px] my-4'
                                                 />
                                             </FormControl>
                                             <FormMessage />
@@ -119,16 +119,16 @@ export function LoginForm() {
                                     )}
                                 />
                             </div>
-                            <Button className="bg-blue-600 hover:bg-blue-700 text-white rounded-md w-full py-6 mt-6 text-lg">Log In</Button>
+                            <Button className="bg-blue-600 hover:bg-blue-700 text-white rounded-md w-full py-5 mt-6 text-lg">Log In</Button>
 
-                            <div className="my-5 text-center">
+                            <div className="my-3 text-center">
                                 Having trouble? <Link href="#" className="text-blue-600 font-normal text-md">Get Help</Link>
                                 <br />
                                 <Link href={"#"} className="text-blue-600 font-normal text-md">Forget your password? </Link>
                             </div>
-                            <Separator className="my-6 h-0.5" />
+                            <Separator className="my-4 h-0.5" />
 
-                            <div className="my-5 text-center">
+                            <div className="my-3 text-center">
                                 Don&apos;t have an account yet? <Link href="#" className="text-blue-600 font-normal text-md">Sign Up</Link>
                             </div>
                         </form>

@@ -6,7 +6,13 @@ import { SingInFormValues } from "@/schema/authentication";
 
 export const { signIn, handlers, signOut, auth } = NextAuth({
   providers: [
-    Google,
+    Google({
+      authorization: {
+        params: {
+          scope: "openid profile email",
+        },
+      },
+    }),
     Credentials({
       name: "Credentials",
       credentials: {
@@ -35,6 +41,27 @@ export const { signIn, handlers, signOut, auth } = NextAuth({
     signIn: "/signin",
   },
   callbacks: {
+    async signIn({ user, account, profile }) {
+      if (account && account?.provider === "google") {
+        try {
+          // // Call your custom API to register or log in the user
+          // const response = await AuthService.registerOrLoginGoogleUser({
+          //   id: user.id,
+          //   email: user.email,
+          //   name: user.name,
+          // });
+          // if (response?.statusCode >= 400) {
+          //   console.log("response", response);
+          //   return false; // Return false to stop the sign-in process
+          // }
+          console.log("user", user);
+        } catch (error: any) {
+          console.error("Google sign-in error:", error);
+          return false;
+        }
+      }
+      return true;
+    },
     async jwt({ token, user }: { token: any; user: any | any }) {
       if (token && user) {
         token.user = {
@@ -50,5 +77,5 @@ export const { signIn, handlers, signOut, auth } = NextAuth({
       return session;
     },
   },
-  debug: true,
+  debug: false,
 });
