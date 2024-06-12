@@ -16,10 +16,12 @@ import { ForgotPwdResponse } from './interfaces/forgot-pwd.interface';
 import { SignInDTO } from './dto/login.dto';
 import { SignInResponse } from './interfaces/login.interface';
 import { SignUpDTO } from './dto/sign-up.dto';
-import { AuthGuard } from '@nestjs/passport';
 import { AuthenticationService } from './auth.service';
 import { JwtConfigService } from 'src/config/jwt/config.service';
 import { AppConfigService } from 'src/config/app/config.service';
+import { LocalAuthGuard } from './guards/local-auth.guard';
+import { Public } from './decorator/public.decorator';
+import { JwrAuthGuard } from './guards/jwt.guard';
 
 @Controller('auth')
 export class AuthenticationController {
@@ -34,6 +36,7 @@ export class AuthenticationController {
     return 'test';
   }
   @Post('sign-up')
+  @Public()
   async signup(
     @Body() signupDto: SignUpDTO,
     @Res() res: Response,
@@ -42,8 +45,9 @@ export class AuthenticationController {
     return res.status(result.statusCode).json(result);
   }
 
-  @UseGuards(AuthGuard('local'))
+  @UseGuards(LocalAuthGuard)
   @Post('sign-in')
+  @Public()
   async signIn(
     @Body() signInDto: SignInDTO,
     @Res() res: Response,
@@ -68,6 +72,7 @@ export class AuthenticationController {
   }
 
   @Post('forgot')
+  @Public()
   async forgotPassword(
     @Body() forgotPasswordDto: ForgotPwdDTO,
     @Res() res: Response,
@@ -77,6 +82,7 @@ export class AuthenticationController {
   }
 
   @Patch(':token')
+  @Public()
   async resetPassword(
     @Param('token') token: string,
     @Body() resetPasswordDto: ResetPasswordDTO,
@@ -91,9 +97,10 @@ export class AuthenticationController {
   }
 
   @Post('logout')
-  async logout(@Res() res: Response): Promise<Response<ResponseOut<null>>> {
+  @UseGuards(JwrAuthGuard)
+  async logout(@Res() res: Response): Promise<void> {
     await this.authService.logout(res);
-    return res.status(200).json({
+    res.status(200).json({
       statusCode: 200,
       status: 'success',
       message: 'user logout is a success',

@@ -2,6 +2,12 @@ import { registerAs } from '@nestjs/config';
 import { Transform } from 'class-transformer';
 import { IsNumber, IsString } from 'class-validator';
 import validateConfig from 'src/utils/validate-config';
+/**
+ * Class to validate the environment variables
+ * @file configuration.ts
+ * @class EnvironmentVariablesValidator
+ *
+ */
 class EnvironmentVariablesValidator {
   @IsString()
   JWT_SECRET: string;
@@ -14,6 +20,11 @@ class EnvironmentVariablesValidator {
   @IsNumber()
   JWT_COOKIE_EXPIRES_IN: number;
 }
+/**
+ * Configuration for the jwt
+ * @file configuration.ts
+ * @export default - configuration for the jwt
+ */
 export default registerAs('jwt', () => {
   validateConfig(process.env, EnvironmentVariablesValidator);
   return {

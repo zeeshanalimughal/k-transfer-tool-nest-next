@@ -4,3 +4,7 @@ export interface SignInResponse {
   token: string;
   user: UserDocument;
 }
+export interface LogoutResponse {
+  statusCode: number;
+  message: string;
+}

@@ -1,7 +1,6 @@
 import { Injectable, NotAcceptableException } from '@nestjs/common';
 import { Response } from 'express';
 import { ResponseOut } from 'src/common/interfaces/response.interface';
-import { JwtStrategy } from './jwt.strategy';
 import { SignInDTO } from './dto/login.dto';
 import { SignInResponse } from './interfaces/login.interface';
 import { ForgotPwdDTO } from './dto/forgot-pwd.dto';
@@ -13,14 +12,14 @@ import { UsersRepository } from '../users/users.repository';
 import { UserDocument } from '../users/entities/user.entity';
 import { SignUpDTO } from './dto/sign-up.dto';
 import { UserAlreadyExistsException } from './exceptions/UserAlreadyExistsException';
-import { SocialInterface } from '../auth-google/interface/social.interface';
+import { JwtStrategy } from './strategies/jwt.strategy';
 
 @Injectable()
 @LogClass()
 export class AuthenticationService {
   constructor(
     private readonly usersRepository: UsersRepository,
-    private jwtStrategy: JwtStrategy,
+    private readonly jwtStrategy: JwtStrategy,
   ) {}
 
   async validateUser(email: string, password: string): Promise<any> {
@@ -60,16 +59,6 @@ export class AuthenticationService {
         message: 'An error occurred',
       };
     }
-  }
-
-  async validateSocialLogin(
-    authProvider: string,
-    socialData: SocialInterface,
-  ): Promise<any> {
-    return {
-      authProvider,
-      socialData,
-    };
   }
 
   async forgotPassword(
@@ -158,5 +147,6 @@ export class AuthenticationService {
   async logout(res: Response): Promise<void> {
     res.clearCookie('user_id');
     res.clearCookie('jwt');
+    res.clearCookie('connect.sid');
   }
 }

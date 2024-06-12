@@ -6,15 +6,15 @@ import { MongoDatabaseProviderModule } from './providers/mongo/provider.module';
 import { AuthenticationModule } from './modules/authentication/auth.module';
 import { UsersModule } from './modules/users/users.module';
 import { ErrorHandlingMiddleware } from './common/middleware/error-handling';
-import { AuthGoogleModule } from './modules/auth-google/auth-google.module';
+import { ExpressSessionConfigModule } from './config/session/session.module';
 
 @Module({
   imports: [
     AppConfigModule,
+    ExpressSessionConfigModule,
     MongoDatabaseProviderModule,
     AuthenticationModule,
     UsersModule,
-    AuthGoogleModule,
   ],
   controllers: [AppController],
   providers: [AppService],

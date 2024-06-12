@@ -1,4 +1,5 @@
 import { Logger } from '@nestjs/common';
+import { safeStringify } from 'src/utils/utils';
 
 export function LogClass(): ClassDecorator {
   return (target: any) => {
@@ -15,9 +16,7 @@ export function LogClass(): ClassDecorator {
         prototype[methodName] = async function (...args: any[]) {
           const methodLogger = new Logger(target.name);
           methodLogger.log(
-            `Start executing ${methodName} with arguments: ${JSON.stringify(
-              args,
-            )}`,
+            `Start executing ${methodName} with arguments: ${safeStringify(args)}`,
           );
 
           try {
