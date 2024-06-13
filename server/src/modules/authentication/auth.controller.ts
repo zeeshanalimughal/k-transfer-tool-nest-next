@@ -17,7 +17,7 @@ import { SignInDTO } from './dto/login.dto';
 import { SignInResponse } from './interfaces/login.interface';
 import { SignUpDTO } from './dto/sign-up.dto';
 import { AuthenticationService } from './auth.service';
-import { JwtConfigService } from 'src/config/jwt/config.service';
+import { JwtConfigService } from 'src/config/auth/jwt/config.service';
 import { AppConfigService } from 'src/config/app/config.service';
 import { LocalAuthGuard } from './guards/local-auth.guard';
 import { Public } from './decorator/public.decorator';

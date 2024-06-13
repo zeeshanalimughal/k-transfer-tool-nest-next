@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { PassportModule } from '@nestjs/passport';
-import { JwtConfigModule } from 'src/config/jwt/config.module';
+import { JwtConfigModule } from 'src/config/auth/jwt/config.module';
 import { JwtProviderModule } from 'src/providers/jwt/provider.module';
 import { AppConfigModule } from 'src/config/app/config.module';
 import { UsersModule } from '../users/users.module';
@@ -10,6 +10,7 @@ import { AuthenticationService } from './auth.service';
 import { LocalStrategy } from './strategies/local.strategy';
 import { JwtStrategy } from './strategies/jwt.strategy';
 import { SessionSerializer } from 'src/common/serializers/session.serializer';
+import { GoogleAuthConfigModule } from 'src/config/auth/google/google-config.module';
 
 @Module({
   imports: [
@@ -18,6 +19,7 @@ import { SessionSerializer } from 'src/common/serializers/session.serializer';
     UsersModule,
     JwtConfigModule,
     AppConfigModule,
+    GoogleAuthConfigModule,
   ],
   controllers: [AuthenticationController],
   providers: [
