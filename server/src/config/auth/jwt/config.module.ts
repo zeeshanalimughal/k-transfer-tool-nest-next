@@ -13,9 +13,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
     ConfigModule.forRoot({
       load: [configuration],
       validationSchema: Joi.object({
-        JWT_SECRET: Joi.string().default(
-          'my-ultra-secure-and-ultra-long-secret',
-        ),
+        JWT_SECRET: Joi.string().default('secret'),
         JWT_EXPIRES_IN: Joi.string().default('90d'),
         JWT_COOKIE_EXPIRES_IN: Joi.string().default('90'),
       }),

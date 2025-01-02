@@ -3,7 +3,7 @@ import { PassportStrategy } from '@nestjs/passport';
 import { ExtractJwt, Strategy } from 'passport-jwt';
 import { LogMethod } from 'src/common/decorators/log-method.decorator';
 import { ResponseOut } from 'src/common/interfaces/response.interface';
-import { JwtConfigService } from 'src/config/jwt/config.service';
+import { JwtConfigService } from 'src/config/auth/jwt/config.service';
 import { UserDocument } from 'src/modules/users/entities/user.entity';
 import { SignInResponse } from '../interfaces/login.interface';
 import { JwtService } from '@nestjs/jwt';

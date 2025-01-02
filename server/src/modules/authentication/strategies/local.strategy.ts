@@ -3,7 +3,7 @@ import { PassportStrategy } from '@nestjs/passport';
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { AuthenticationService } from '../auth.service';
 import { ExtractJwt } from 'passport-jwt';
-import configuration from 'src/config/jwt/configuration';
+import configuration from 'src/config/auth/jwt/configuration';
 
 /**
  * Local Strategy class to validate user credentials
